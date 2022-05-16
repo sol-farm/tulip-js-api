@@ -1,0 +1,204 @@
+openapi: 3.0.0
+
+info:
+  title: Solfarm API
+  version: 0.0.5
+
+servers:
+  - url: https://api4.solfarm.io
+    description: Tulip protocol API endpoints.
+
+paths:
+  /leveraged:
+    get:
+      summary: Returns leveraged farm list.
+      description: Get all the accounts for Tulip leveraged farms.
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /reserves:
+    get:
+      summary: Returns reserves list.
+      description: Get all the accounts for Tulip reserves.
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /reserve:
+    get:
+      summary: Return info about a reserve.
+      description: Return information about a tulip reserve.
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /strategy:
+  get:
+    summary: Returns strategy vaults list.
+    description: Get all the accounts for Tulip strategy vaults.
+    responses:
+      "200":
+        description: A JSON array of user names
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+
+  /raydium/vaults:
+    get:
+      summary: Returns Tulip vaults for Raydium.
+      description: Get all vaults accounts and data for Raydium.
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /raydium/farms:
+    get:
+      summary: Returns Tulip farms for Raydium
+      description: Get all farms accounts and data for Raydium.
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /orca/farms:
+    get:
+      summary: Returns Tulip farms for Orca.
+      description: Get all farms accounts and data for Orca.
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /orca/vaults:
+    get:
+      summary: Returns Tulip vaults for Orca.
+      description: Get all vaults accounts and data for Orca.
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /saber/vaults:
+    get:
+      summary: Returns Tulip vaults for Saber.
+      description: Get all vaults accounts and data for Saber.
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /user/leveraged:
+    get:
+      summary: Return information about user leveraged positions
+      description: Return information about user leveraged positions.
+      parameters:
+        - in: query
+          name: pool
+          description: 0 for raydium | 1 for orca
+          schema:
+            type: number
+          required: true
+        - in: query
+          name: pairName
+          description: pairName such as RAY-SOL
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: userAddress
+          description: user Solana address
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
