@@ -365,10 +365,6 @@ const getSolFarmPoolInfo = async (_poolVault, _pairName, _userAddress, _position
       if (userLpTokens.toNumber() === 0)
         continue;
 
-      const virtualValue = userLpTokens
-          .multipliedBy(unitLpValue)
-          .div(_supplyDecimals);
-
       let borrow1 = new BN(
           decoded.obligationBorrowOne.borrowedAmountWads.toString()
       );
@@ -413,8 +409,8 @@ const getSolFarmPoolInfo = async (_poolVault, _pairName, _userAddress, _position
         const reserveTwo = await getReserveInfo(_tempData);
 
         newBorrowRates = [
-            reserveOne.cumulativeBorrowRate,
-            reserveTwo.cumulativeBorrowRate,
+          reserveOne.cumulativeBorrowRate,
+          reserveTwo.cumulativeBorrowRate,
         ];
 
         //TODO: check this
@@ -481,8 +477,6 @@ const getSolFarmPoolInfo = async (_poolVault, _pairName, _userAddress, _position
         return Math.round((acc + curr.amount * curr.price) * 1e2) / 1e2;
       }, 0);
 
-      // equity value is the virtual value - the debt value
-      const equityValue = virtualValue.minus(debtValue);
 
       // console.log('pos info ', decoded.coinDeposits.toString(), decoded.pcDeposits.toString());
       const coinDepositsValue = new TokenAmount(
@@ -508,9 +502,14 @@ const getSolFarmPoolInfo = async (_poolVault, _pairName, _userAddress, _position
        * virtual value - borrowed  = value
        */
 
+      const virtualValue = (coins[0].amount * reserve0Price) + (coins[1].amount * reserve1Price);
+
+      // equity value is the virtual value - the debt value
+      const equityValue = virtualValue -  debtValue;
+
       let vaultInfo = {
-        virtualValue: bnToFiatUsd(virtualValue),
-        equityValue: bnToFiatUsd(equityValue),
+        virtualValue: virtualValue,
+        equityValue: equityValue,
         debtValue: debtValue,
         borrow,
         coins
