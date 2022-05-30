@@ -1512,8 +1512,8 @@ const strategyVaultMigration = async () => {
   }
 };
 
-// strategyVaultMigration();
-// lendingReservesMigration();
+strategyVaultMigration();
+lendingReservesMigration();
 leverageMigration();
 rayFarmsMigration();
 rayVaultsMigration();
