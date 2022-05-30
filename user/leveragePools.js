@@ -455,7 +455,7 @@ const getSolFarmPoolInfo = async (_poolVault, _pairName, _userAddress, _position
 
 
       // create the borrow object
-      for (let i = 0; i < borrowedAsset.length; i++) {
+      for (let i = 0; i < borrowedAsset?.length; i++) {
 
         // console.log('borrowedAssets ', borrowedAsset.length);
         let borrowDebtValue = new TokenAmount(borrowed[i]).wei
